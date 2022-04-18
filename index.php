@@ -1,10 +1,15 @@
 <?php
+require 'vendor/autoload.php';
+
+
 session_start();
 ob_start();
 require "./commons/lib.php";
 require "./commons/utils.php";
-require "./app/controllers/HomeController.php";
-require "./app/controllers/AuthController.php";
+
+use App\Controllers\AuthController;
+use App\Controllers\HomeController;
+use App\Controllers\ProductController;
 
 $url = isset($_GET['url']) ? rtrim($_GET['url'], '/') : "/";
 
@@ -19,10 +24,29 @@ switch ($url) {
         break;
     case 'login':
         $ctr = new AuthController();
+        $ctr->formLogin();
+        break;
+    case 'submit-login':
+        $ctr = new AuthController();
+        $ctr->submitLogin();
+        break;
+    case 'register':
+        $ctr = new AuthController();
+        $ctr->registerForm();
+        break;
+    case 'submit-register':
+        $ctr = new AuthController();
+        $ctr->submitRegister();
+        break;
+    case 'logout':
+        $ctr = new AuthController();
+        $ctr->logout();
+        break;
+    case 'products':
+        $ctr = new ProductController();
         $ctr->index();
         break;
-
     default:
-        # code...
+        require './app/views/404.php';
         break;
 }

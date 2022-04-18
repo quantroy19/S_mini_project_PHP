@@ -10,35 +10,13 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 
 </head>
-<nav class="navbar navbar-expand-lg navbar-light" style="background-color: #eeee;">
-    <div class="container">
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                <li class="nav-item">
-                    <a class="nav-link fs-5" aria-current="page" href="#">Trang chủ</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link fs-5" href="#">Quản lý sản phẩm</a>
-                </li>
-            </ul>
-            <form class="d-flex">
-
-                <button class="btn btn-success" type="submit">Login</button>
-            </form>
-        </div>
-    </div>
-</nav>
+<?php include './app/views/layout/_nav.php' ?>
 
 <body>
-    <div class="container">
+    <div class="container p-2">
         <?php require "$view" ?>
     </div>
 </body>
-<footer class="bg-light">
-
-    <p class="my-2">
-        <a href="#">Back to top</a>
-    </p>
-</footer>
+<?php include './app/views/layout/_footer.php' ?>
 
 </html>

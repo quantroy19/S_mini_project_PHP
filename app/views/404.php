@@ -1,0 +1,1 @@
+<h2 style="display: flex; justify-content: center; margin-top: 20px;">404 not found </h2>
