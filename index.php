@@ -46,6 +46,10 @@ switch ($url) {
         $ctr = new ProductController();
         $ctr->index();
         break;
+    case 'products/add':
+        $ctr = new ProductController();
+        $ctr->add();
+        break;
     default:
         require './app/views/404.php';
         break;

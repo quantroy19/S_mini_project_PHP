@@ -9,7 +9,7 @@
             <form action="<?= BASE_URL ?>submit-login" method="post">
                 <div class="form-group">
                     <label for="email">Email</label>
-                    <input id="email" type="text" class="form-control" name="email">
+                    <input value="<?php if (isset($_COOKIE['email'])) echo $_COOKIE['email'] ?>" id="email" type="text" class="form-control" name="email">
                     <?php if (isset($_SESSION['error_email'])) : ?>
                         <div class="text-danger">
                             <?= $_SESSION['error_email'] ?>
@@ -18,7 +18,7 @@
                 </div>
                 <div class="form-group my-2">
                     <label for="password">Mật khẩu</label>
-                    <input id="password" type="password" class="form-control" name="password">
+                    <input value="<?php if (isset($_COOKIE['password'])) echo $_COOKIE['password'] ?>" id="password" type="password" class="form-control" name="password">
                     <?php if (isset($_SESSION['error_pass'])) : ?>
                         <div class="text-danger">
                             <?= $_SESSION['error_pass'] ?>
@@ -27,7 +27,7 @@
                 </div>
                 <div class="d-flex justify-content-between">
                     <div class="mb-3 form-check">
-                        <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                        <input <?php if (isset($_COOKIE['email'])) echo 'checked' ?> type="checkbox" class="form-check-input" id="exampleCheck1" name="remember">
                         <label class="form-check-label" for="exampleCheck1">Ghi nhớ</label>
                     </div>
                     <div class="mb-3">

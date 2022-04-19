@@ -11,9 +11,9 @@
             </ul>
             <form class="d-flex">
                 <?php if (isset($_SESSION['auth'])) : ?>
-                    <a class="btn btn-success" href="<?= BASE_URL ?>logout">Đăng xuất</a>
+                    <a class="btn btn-secondary" href="<?= BASE_URL ?>logout">Đăng xuất</a>
                 <?php elseif (!isset($_SESSION['auth'])) : ?>
-                    <a class="btn btn-light" href="<?= BASE_URL ?>login">Đăng nhập</a>
+                    <a class="btn btn-success" href="<?= BASE_URL ?>login">Đăng nhập</a>
                 <?php endif ?>
             </form>
         </div>

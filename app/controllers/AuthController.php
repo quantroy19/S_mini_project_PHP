@@ -36,6 +36,11 @@ class AuthController
             }
 
             if ($flag) {
+                if (isset($_POST['remember']) && $_POST['remember'] !== null) {
+                    setcookie('email', $userLogin->email, time() + 86400);
+                    setcookie('password', $_POST['password'], time() + 86400);
+                }
+
                 $_SESSION['auth'] = [
                     'username' => $userLogin->username,
                     'email' => $userLogin->email,
