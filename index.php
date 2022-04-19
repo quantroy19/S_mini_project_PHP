@@ -50,6 +50,10 @@ switch ($url) {
         $ctr = new ProductController();
         $ctr->add();
         break;
+    case 'products/submit-add-form':
+        $ctr = new ProductController();
+        $ctr->submitAdd();
+        break;
     default:
         require './app/views/404.php';
         break;

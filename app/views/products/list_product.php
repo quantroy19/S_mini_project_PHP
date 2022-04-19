@@ -14,7 +14,7 @@
             <tr>
                 <td><?= $pro->id ?></td>
                 <td><?= $pro->name ?></td>
-                <td><img src="<?= $pro->image ?>" alt="img"> </td>
+                <td><img width="60px" src="<?= IMAGE_URL . $pro->image ?>" alt="img"> </td>
                 <td><?= $pro->price ?></td>
                 <td>
                     <a class="btn btn-sm btn-warning">Sửa</a>
