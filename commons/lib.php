@@ -28,6 +28,8 @@ function unsetSessionMess($key)
             unset($_SESSION["$item"]);
             // var_dump($_SESSION["$item"]);
         }
+    } else {
+        unset($_SESSION["$key"]);
     }
 }
 function headerRedirect($url)

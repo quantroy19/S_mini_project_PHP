@@ -9,7 +9,8 @@ class AuthController
     public function formLogin()
     {
         unsetSessionMess('error_email', 'error_pass');
-        return render_view('auth/login.php', ['title' => 'Đăng nhập']);
+        render_view('auth/login.php', ['title' => 'Đăng nhập']);
+        unsetSessionMess('notAuth');
     }
     public function submitLogin()
     {
@@ -60,7 +61,7 @@ class AuthController
     public function submitRegister()
     {
         $flag = true;
-        unsetSessionMess('error_email', 'error_pass', 'error_repass');
+        unsetSessionMess('error_email', 'error_pass', 'error_repass', 'error_username');
         if (isset($_POST['submitFormRegister'])) {
 
             $model = new Users;

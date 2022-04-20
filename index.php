@@ -54,6 +54,18 @@ switch ($url) {
         $ctr = new ProductController();
         $ctr->submitAdd();
         break;
+    case 'products/edit':
+        $ctr = new ProductController();
+        $ctr->edit();
+        break;
+    case 'products/submit-edit-form':
+        $ctr = new ProductController();
+        $ctr->submitEdit();
+        break;
+    case 'products/remove':
+        $ctr = new ProductController();
+        $ctr->remove();
+        break;
     default:
         require './app/views/404.php';
         break;

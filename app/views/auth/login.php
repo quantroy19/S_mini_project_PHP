@@ -1,8 +1,13 @@
-<div class="alter alter-success">
-    <?php if (isset($_SESSION['success'])) {
-        $_SESSION['success'];
-    } ?>
-</div>
+<?php if (isset($_SESSION['success'])) : ?>
+    <div class="alter alter-success">
+        <?= $_SESSION['success']; ?>
+    </div>
+<?php endif ?>
+<?php if (isset($_SESSION['notAuth'])) : ?>
+    <div class="alert alert-warning" role="alert">
+        <?= $_SESSION['notAuth']; ?>
+    </div>
+<?php endif ?>
 <div class="row ">
     <h3 class="mt-2"><?= $title ?></h2>
         <div class="col-6 m-4 p-3 border mx-auto">
