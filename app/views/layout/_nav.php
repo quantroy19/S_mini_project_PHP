@@ -8,6 +8,9 @@
                 <li class="nav-item">
                     <a class="nav-link fs-5" href="<?= BASE_URL ?>products">Quản lý sản phẩm</a>
                 </li>
+                <!-- <li class="nav-item">
+                    <a class="nav-link fs-5" href="<?= BASE_URL ?>products"><?= $_SESSION['auth']['username'] ?></a>
+                </li> -->
             </ul>
             <form class="d-flex">
                 <?php if (isset($_SESSION['auth'])) : ?>

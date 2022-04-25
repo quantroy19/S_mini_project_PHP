@@ -4,41 +4,41 @@ namespace App\Controllers;
 
 use App\Models\Products;
 
-class ProductController
+class ProductController extends BaseController
 {
     public function index()
     {
         if (!isset($_SESSION['auth'])) {
-            with('notAuth', 'Bạn cần đăng nhập trước!');
+            $this->with('notAuth', 'Bạn cần đăng nhập trước!');
 
-            return headerRedirect('login');
+            return $this->headerRedirect('login');
         }
         $title = 'Danh sách sản phẩm';
         $products = Products::all();
-        return render_view('products/list_product.php', ['listProduct' => $products, 'title' => $title]);
+        return $this->render_view('products/list_product.php', ['listProduct' => $products, 'title' => $title]);
     }
     public function add()
     {
         $title = 'Thêm sản phẩm';
-        return render_view('products/add.php', ['title' => $title]);
+        return $this->render_view('products/add.php', ['title' => $title]);
     }
     public function submitAdd()
     {
         if (isset($_POST['submitAddForm'])) {
-            unsetSessionMess('error_name', 'error_img', 'error_price', 'error_des');
+            $this->unsetSessionMess('error_name', 'error_img', 'error_price', 'error_des');
             $flag = true;
 
             //check Name
             if (empty($_POST['name'])) {
                 $flag = false;
-                with('error_name', 'Tên sản phẩm không được để trống');
+                $this->with('error_name', 'Tên sản phẩm không được để trống');
             } elseif (strlen($_POST['name']) < 5) {
 
                 $flag = false;
-                with('error_name', 'Tên sản phẩm tối thiểu 5 kí tự');
+                $this->with('error_name', 'Tên sản phẩm tối thiểu 5 kí tự');
             } elseif (strlen($_POST['name']) > 30) {
                 $flag = false;
-                with('error_name', 'Tên sản phẩm tối đa 30 kí tự');
+                $this->with('error_name', 'Tên sản phẩm tối đa 30 kí tự');
             }
 
             // check Img
@@ -46,23 +46,23 @@ class ProductController
             $allowtypes = array('jpg', 'png', 'jpeg', 'gif');
             if (($_FILES['image']['size']) == 0) {
                 $flag = false;
-                with('error_img', 'Không được để trống ảnh');
+                $this->with('error_img', 'Không được để trống ảnh');
             } elseif (($_FILES['image']['size']) > 2000000) {
                 $flag = false;
-                with('error_img', 'File phải dưới 2M');
+                $this->with('error_img', 'File phải dưới 2M');
             } elseif (!in_array($imageFileType, $allowtypes)) {
                 $flag = false;
-                with('error_img', 'File tải lên phải là đuôi jpg, png, jpeg, gif');
+                $this->with('error_img', 'File tải lên phải là đuôi jpg, png, jpeg, gif');
             }
 
             //check price
 
             if (empty($_POST['price'])) {
                 $flag = false;
-                with('error_price', 'Không được để trống giá');
+                $this->with('error_price', 'Không được để trống giá');
             } elseif (!is_numeric($_POST['price'])) {
                 $flag = false;
-                with('error_price', 'Giá phải là số');
+                $this->with('error_price', 'Giá phải là số');
             } elseif (($_POST['price']) < 0) {
             }
 
@@ -71,7 +71,7 @@ class ProductController
             if (strlen($_POST['description']) > 250) {
 
                 $flag = false;
-                with('error_des', 'Mô tả không quá 250 kí tự');
+                $this->with('error_des', 'Mô tả không quá 250 kí tự');
             }
 
             if ($flag) {
@@ -82,6 +82,10 @@ class ProductController
                     $imageValue = uniqid() . '-' . $img['name'];
                     move_uploaded_file($img['tmp_name'], './public/uploads/' . $imageValue);
                     $imageValue =  $imageValue;
+
+                    $_POST['name'] = htmlspecialchars($_POST['name']);
+                    $_POST['description'] = htmlspecialchars($_POST['description']);
+                    // echo ($a);
                     $model->insert([
                         'name' => $_POST['name'],
                         'image' => $imageValue,
@@ -89,9 +93,9 @@ class ProductController
                         'description' => $_POST['description'],
                     ]);
                 }
-                headerRedirect('products');
+                $this->headerRedirect('products');
             } else {
-                headerRedirect('products/add');
+                $this->headerRedirect('products/add');
             }
 
 
@@ -103,7 +107,7 @@ class ProductController
         $title = 'Sửa sản phẩm';
         $pro_id = $_GET['id'];
         $product = Products::where(['id', '=', $pro_id])->first();
-        return render_view('products/edit.php', [
+        return $this->render_view('products/edit.php', [
             'title' => $title,
             'product' => $product,
         ]);
@@ -111,20 +115,20 @@ class ProductController
     public function submitEdit()
     {
         if (isset($_POST['submitEditForm'])) {
-            unsetSessionMess('error_name', 'error_img', 'error_price', 'error_des');
+            $this->unsetSessionMess('error_name', 'error_img', 'error_price', 'error_des');
             $flag = true;
 
             //check Name
             if (empty($_POST['name'])) {
                 $flag = false;
-                with('error_name', 'Tên sản phẩm không được để trống');
+                $this->with('error_name', 'Tên sản phẩm không được để trống');
             } elseif (strlen($_POST['name']) < 5) {
 
                 $flag = false;
-                with('error_name', 'Tên sản phẩm tối thiểu 5 kí tự');
+                $this->with('error_name', 'Tên sản phẩm tối thiểu 5 kí tự');
             } elseif (strlen($_POST['name']) > 30) {
                 $flag = false;
-                with('error_name', 'Tên sản phẩm tối đa 30 kí tự');
+                $this->with('error_name', 'Tên sản phẩm tối đa 30 kí tự');
             }
 
             // check Img
@@ -133,10 +137,10 @@ class ProductController
             if (($_FILES['image']['size']) > 0) {
                 if ($_FILES['image']['size'] > 2000000) {
                     $flag = false;
-                    with('error_img', 'File phải dưới 2M');
+                    $this->with('error_img', 'File phải dưới 2M');
                 } elseif (!in_array($imageFileType, $allowtypes)) {
                     $flag = false;
-                    with('error_img', 'File tải lên phải là đuôi jpg, png, jpeg, gif');
+                    $this->with('error_img', 'File tải lên phải là đuôi jpg, png, jpeg, gif');
                 }
             }
 
@@ -145,10 +149,10 @@ class ProductController
 
             if (empty($_POST['price'])) {
                 $flag = false;
-                with('error_price', 'Không được để trống giá');
+                $this->with('error_price', 'Không được để trống giá');
             } elseif (!is_numeric($_POST['price'])) {
                 $flag = false;
-                with('error_price', 'Giá phải là số');
+                $this->with('error_price', 'Giá phải là số');
             } elseif (($_POST['price']) < 0) {
             }
 
@@ -157,7 +161,7 @@ class ProductController
             if (strlen($_POST['description']) > 25) {
 
                 $flag = false;
-                with('error_des', 'Mô tả không quá 250 kí tự');
+                $this->with('error_des', 'Mô tả không quá 250 kí tự');
             }
             if ($flag) {
                 $model = Products::where(['id', '=', $_POST['pro_id']])->first();
@@ -179,7 +183,7 @@ class ProductController
                         'description' => $_POST['description'],
                     ]);
                 }
-                headerRedirect('products');
+                $this->headerRedirect('products');
             } else {
                 header('Location: ' . $_SERVER['HTTP_REFERER']);
                 die;
@@ -190,6 +194,6 @@ class ProductController
     {
 
         Products::destroy($_GET['id']);
-        headerRedirect('products');
+        $this->headerRedirect('products');
     }
 }

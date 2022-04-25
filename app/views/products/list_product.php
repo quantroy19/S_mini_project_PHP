@@ -11,9 +11,10 @@
         </th>
     </tr>
     <tbody>
+        <?php $index = 0 ?>
         <?php foreach ($listProduct as $pro) : ?>
             <tr>
-                <td><?= $pro->id ?></td>
+                <td><?= ++$index ?></td>
                 <td><?= $pro->name ?></td>
                 <td><img width="60px" src="<?= IMAGE_URL . $pro->image ?>" alt="img"> </td>
                 <td><?= number_format($pro->price, 0, ',', ',') ?>đ</td>

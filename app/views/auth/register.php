@@ -28,7 +28,7 @@
                 </div>
                 <div class="form-group my-2">
                     <label for="pass">Mật khẩu</label>
-                    <input id="pass" type="text" class="form-control" name="password">
+                    <input id="pass" type="password" class="form-control" name="password">
                     <?php if (isset($_SESSION['error_pass'])) : ?>
                         <div class="text-danger">
                             <?= $_SESSION['error_pass'] ?>

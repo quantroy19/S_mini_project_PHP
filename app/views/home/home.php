@@ -1,6 +1,11 @@
 <h2><?= $title ?> </h2>
 
 <div class="row">
+    <?php if (isset($_SESSION['success_auth'])) : ?>
+        <div class="alert alert-success" role="alert">
+            <?= $_SESSION['success_auth']; ?>
+        </div>
+    <?php endif ?>
     <?php foreach ($products as $pro) :    ?>
         <div class="col-3 mb-5">
             <div class="card" style="width: auto">

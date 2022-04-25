@@ -12,9 +12,14 @@
     <h3 class="mt-2"><?= $title ?></h2>
         <div class="col-6 m-4 p-3 border mx-auto">
             <form action="<?= BASE_URL ?>submit-login" method="post">
+                <?php if (isset($_SESSION['error_auth'])) : ?>
+                    <div class="text-danger">
+                        <?= $_SESSION['error_auth'] ?>
+                    </div>
+                <?php endif ?>
                 <div class="form-group">
                     <label for="email">Email</label>
-                    <input value="<?php if (isset($_COOKIE['email'])) echo $_COOKIE['email'] ?>" id="email" type="text" class="form-control" name="email">
+                    <input id="email" type="text" class="form-control" name="email">
                     <?php if (isset($_SESSION['error_email'])) : ?>
                         <div class="text-danger">
                             <?= $_SESSION['error_email'] ?>
@@ -23,7 +28,7 @@
                 </div>
                 <div class="form-group my-2">
                     <label for="password">Mật khẩu</label>
-                    <input value="<?php if (isset($_COOKIE['password'])) echo $_COOKIE['password'] ?>" id="password" type="password" class="form-control" name="password">
+                    <input id="password" type="password" class="form-control" name="password">
                     <?php if (isset($_SESSION['error_pass'])) : ?>
                         <div class="text-danger">
                             <?= $_SESSION['error_pass'] ?>

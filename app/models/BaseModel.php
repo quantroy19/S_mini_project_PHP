@@ -4,9 +4,9 @@ namespace App\Models;
 
 use PDO;
 
-class BaseModel
+abstract class BaseModel
 {
-
+    protected $tableName;
     protected function getConnect()
     {
         $conn = new PDO('mysql:host=localhost;dbname=mini_php_sun;charset=utf8', 'root', '');
